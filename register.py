@@ -1,56 +1,49 @@
 import csv
 from getpass import getpass
 import re
-
+import menu
 
 def read_csv():
     with open('users.csv', 'r') as file:
         reader = csv.DictReader(file)
         return list(reader)
 
-def register():
+
+def get_user_input():
     login = input("Введите логин: ")
-    pattern = re.compile(r"^\S+@\S+\.\S+$")
-    email = input("Введите email: ")
-    is_valid = pattern.match(email)
-    print(is_valid is not None)
     password = getpass("Введите пароль: ")
-
-    if login in [user['login'] for user in read_csv()] or email in [user['email'] for user in read_csv()]:
-        print("Такой пользователь уже существует.")
-        return
-
-    new_user = {
+    email = input("Введите email: ")
+    user_input = {
         'login': login,
         'email': email,
         'password': password
     }
+
+
+def validate(user_input: dict):
+    pattern = re.compile(r"^\S+@\S+\.\S+$")
+    is_valid = pattern.match(user_input["email"])
+    if not is_valid:
+        raise Exception("Invalid input")
+    print(is_valid is not None)
+    if user_input["login"] in [user['login'] for user in read_csv()] or user_input["email"] in [user['email'] for user
+                                                                                                in read_csv()]:
+        print("Такой пользователь уже существует.")
+        return
+
+
+def write_csv(user_input: dict):
+    new_user = user_input.copy()
     with open('users.csv', 'a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(new_user)
     print("Пользователь успешно зарегистрирован.")
 
-def login():
-    login = input("Введите логин: ")
-    password = getpass("Введите пароль: ")
 
+def login(new_user: dict):
     for user in read_csv():
-        if user['login'] == login and user['password'] == password:
+        if new_user['login'] == login and new_user['password'] == password:
             print("Вход выполнен успешно.")
             return
     print("Неверное имя пользователя или пароль.")
 
-menu = '''
-Выберите действие:
-1 - Регистрация
-2 - Вход
-'''
-
-while True:
-    choice = int(input(menu))
-    if choice == 1:
-        register()
-    elif choice == 2:
-        login()
-    else:
-        print("Работа с меню завершена")
