@@ -1,7 +1,7 @@
 import csv
 import re
 from getpass import getpass
-from menu import main
+
 
 
 
@@ -35,15 +35,30 @@ def validate(user_input: dict):
         return
 
 
-def write_csv(user_input: dict):
-    new_user = user_input.copy()
+def write_csv():
+    login = input("Введите логин: ")
+    password = getpass("Введите пароль: ")
+    email = input("Введите email: ")
+    new_user = {
+        'login': login,
+        'email': email,
+        'password': password
+    }
     with open('users.csv', 'a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(new_user)
     print("Пользователь успешно зарегистрирован.")
 
 
-def login(new_user: dict):
+def login():
+    login = input("Введите логин: ")
+    password = getpass("Введите пароль: ")
+    email = input("Введите email: ")
+    new_user = {
+        'login': login,
+        'email': email,
+        'password': password
+    }
     for user in read_csv():
         if new_user['login'] == user["login"] and new_user['password'] == user["password"]:
             print("Вход выполнен успешно.")

@@ -18,3 +18,6 @@ def main()-> None:
             login()
         else:
             print("Работа с меню завершена")
+
+if __name__== "main":
+    main()
