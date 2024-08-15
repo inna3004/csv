@@ -1,6 +1,6 @@
 import csv
 import re
-from getpass import getpass
+
 
 
 
@@ -13,7 +13,7 @@ def read_csv():
 
 def get_user_input():
     login = input("Введите логин: ")
-    password = getpass("Введите пароль: ")
+    password = input("Введите пароль: ")
     email = input("Введите email: ")
     user_input = {
         'login': login,
@@ -37,7 +37,7 @@ def validate(user_input: dict):
 
 def write_csv():
     login = input("Введите логин: ")
-    password = getpass("Введите пароль: ")
+    password = input("Введите пароль: ")
     email = input("Введите email: ")
     new_user = {
         'login': login,
@@ -52,7 +52,7 @@ def write_csv():
 
 def login():
     login = input("Введите логин: ")
-    password = getpass("Введите пароль: ")
+    password = input("Введите пароль: ")
     email = input("Введите email: ")
     new_user = {
         'login': login,

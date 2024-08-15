@@ -4,6 +4,7 @@ from register import login
 
 
 def main()-> None:
+
     menu = ("\n"
             "    Выберите действие:\n"
             "    1 - Регистрация\n"
