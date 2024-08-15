@@ -18,6 +18,7 @@ def get_user_input():
         'email': email,
         'password': password
     }
+    return user_input
 
 
 def validate(user_input: dict):
