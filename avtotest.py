@@ -1,13 +1,9 @@
 import csv
 import unittest
-from unittest.mock import patch
-import os.path
 from pathlib import Path
-from register import read_csv
-from register import get_user_input
-from register import validate
-from register import write_csv
-from register import login
+
+from register import *
+
 
 path = Path('.')
 

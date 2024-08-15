@@ -1,7 +1,9 @@
 import csv
-from getpass import getpass
 import re
-import menu
+from getpass import getpass
+from menu import main
+
+
 
 def read_csv():
     with open('users.csv', 'r') as file:
@@ -43,7 +45,7 @@ def write_csv(user_input: dict):
 
 def login(new_user: dict):
     for user in read_csv():
-        if new_user['login'] == login and new_user['password'] == password:
+        if new_user['login'] == user["login"] and new_user['password'] == user["password"]:
             print("Вход выполнен успешно.")
             return
     print("Неверное имя пользователя или пароль.")
