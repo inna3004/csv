@@ -1,4 +1,9 @@
-import
+from register import read_csv
+from register import get_user_input
+from register import validate
+from register import write_csv
+from register import login
+
 menu = '''
 Выберите действие:
 1 - Регистрация
