@@ -2,9 +2,6 @@ import csv
 import re
 
 
-
-
-
 def read_csv():
     with open('users.csv', 'r') as file:
         reader = csv.DictReader(file)
@@ -35,33 +32,41 @@ def validate(user_input: dict):
         return
 
 
-def write_csv():
-    login = input("Введите логин: ")
-    password = input("Введите пароль: ")
-    email = input("Введите email: ")
-    new_user = {
-        'login': login,
-        'email': email,
-        'password': password
-    }
-    with open('users.csv', 'a', newline='') as file:
+def write_csv(user_input: dict):
+    new_user = user_input.copy()
+    with (open('users.csv', 'a', newline='') as file):
         writer = csv.writer(file)
         writer.writerow(new_user)
     print("Пользователь успешно зарегистрирован.")
 
 
-def login():
-    login = input("Введите логин: ")
-    password = input("Введите пароль: ")
-    email = input("Введите email: ")
-    new_user = {
-        'login': login,
-        'email': email,
-        'password': password
-    }
+def login(new_user: dict):
     for user in read_csv():
         if new_user['login'] == user["login"] and new_user['password'] == user["password"]:
             print("Вход выполнен успешно.")
             return
     print("Неверное имя пользователя или пароль.")
 
+
+def main() -> None:
+    menu = ("\n"
+            "    Выберите действие:\n"
+            "    1 - Регистрация\n"
+            "    2 - Вход\n"
+            "    ")
+
+    while True:
+        choice = int(input(menu))
+        if choice == 1:
+            read_csv()
+            get_user_input()
+            validate()
+            write_csv((get_user_input())
+)
+        elif choice == 2:
+            login(get_user_input())
+        else:
+            print("Работа с меню завершена")
+
+if __name__== "__main__":
+    main()
