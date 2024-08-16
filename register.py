@@ -2,6 +2,7 @@ import csv
 import re
 
 
+
 def read_csv():
     with open('users.csv', 'r') as file:
         reader = csv.DictReader(file)
@@ -32,41 +33,44 @@ def validate(user_input: dict):
         return
 
 
-def write_csv(user_input: dict):
-    new_user = user_input.copy()
-    with (open('users.csv', 'a', newline='') as file):
-        writer = csv.writer(file)
+def write_csv(user_input:dict):
+    new_user=user_input.copy()
+    with (open('users.csv', 'a', encoding="utf8", newline='') as csvfile):
+        fieldnames = ["login", "password", "email"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writerow(new_user)
     print("Пользователь успешно зарегистрирован.")
 
 
-def login(new_user: dict):
-    for user in read_csv():
-        if new_user['login'] == user["login"] and new_user['password'] == user["password"]:
-            print("Вход выполнен успешно.")
-            return
-    print("Неверное имя пользователя или пароль.")
+def logining(new_user: dict):
+    if "login" in new_user and "password" in new_user:
+        for user in read_csv():
+            if new_user["login"] == user["login"] and new_user['password'] == user["password"]:
+                print("Вход выполнен успешно.")
+            else:
+                print("Неверное имя пользователя или пароль.")
 
 
-def main() -> None:
+
+
+
+def main():
     menu = ("\n"
             "    Выберите действие:\n"
-            "    1 - Регистрация\n"
-            "    2 - Вход\n"
+            "    1 - Вход\n"
+            "    2 - Регистрация\n"
             "    ")
-
     while True:
         choice = int(input(menu))
         if choice == 1:
             read_csv()
-            get_user_input()
-            validate()
-            write_csv((get_user_input())
-)
+            logining(get_user_input())
         elif choice == 2:
-            login(get_user_input())
+            read_csv()
+            write_csv(get_user_input())
         else:
             print("Работа с меню завершена")
 
-if __name__== "__main__":
+
+if __name__ == "__main__":
     main()
