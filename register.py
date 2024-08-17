@@ -52,25 +52,3 @@ def logining(new_user: dict):
 
 
 
-
-
-def main():
-    menu = ("\n"
-            "    Выберите действие:\n"
-            "    1 - Вход\n"
-            "    2 - Регистрация\n"
-            "    ")
-    while True:
-        choice = int(input(menu))
-        if choice == 1:
-            read_csv()
-            logining(get_user_input())
-        elif choice == 2:
-            read_csv()
-            write_csv(get_user_input())
-        else:
-            print("Работа с меню завершена")
-
-
-if __name__ == "__main__":
-    main()

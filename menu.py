@@ -24,6 +24,4 @@ def main() -> None:
             print("Работа с меню завершена")
 
 
-if __name__ == "__main__":
-    main()
 
