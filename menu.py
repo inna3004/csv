@@ -1,8 +1,8 @@
-from register import write_csv
-from register import logining
-from register import validate
 from register import get_user_input
+from register import logining
 from register import read_csv
+from register import validate
+from register import write_csv
 
 
 def main() -> None:
@@ -22,6 +22,3 @@ def main() -> None:
             write_csv(get_user_input())
         else:
             print("Работа с меню завершена")
-
-
-

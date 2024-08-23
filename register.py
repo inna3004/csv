@@ -2,11 +2,11 @@ import csv
 import re
 
 
-
 def read_csv():
     with open('users.csv', 'r') as file:
         reader = csv.DictReader(file)
-        return list(reader)
+        result = list(reader)
+        return result
 
 
 def get_user_input():
@@ -33,8 +33,8 @@ def validate(user_input: dict):
         return
 
 
-def write_csv(user_input:dict):
-    new_user=user_input.copy()
+def write_csv(user_input: dict):
+    new_user = user_input.copy()
     with (open('users.csv', 'a', encoding="utf8", newline='') as csvfile):
         fieldnames = ["login", "password", "email"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -42,13 +42,11 @@ def write_csv(user_input:dict):
     print("Пользователь успешно зарегистрирован.")
 
 
-def logining(new_user: dict):
-    if "login" in new_user and "password" in new_user:
+def logining(user_input: dict):
+    keys = user_input.keys()
+    if "login" in keys and "password" in keys:
         for user in read_csv():
-            if new_user["login"] == user["login"] and new_user['password'] == user["password"]:
-                print("Вход выполнен успешно.")
+            if user_input["login"] == user["login"] and user_input['password'] == user["password"]:
+                return True
             else:
-                print("Неверное имя пользователя или пароль.")
-
-
-
+                return False
