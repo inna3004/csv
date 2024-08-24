@@ -29,8 +29,7 @@ def validate(user_input: dict):
     print(is_valid is not None)
     if user_input["login"] in [user['login'] for user in read_csv()] or user_input["email"] in [user['email'] for user
                                                                                                 in read_csv()]:
-        print("Такой пользователь уже существует.")
-        return
+        raise Exception("Такой пользователь уже существует.")
 
 
 def write_csv(user_input: dict):
@@ -39,7 +38,7 @@ def write_csv(user_input: dict):
         fieldnames = ["login", "password", "email"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writerow(new_user)
-    print("Пользователь успешно зарегистрирован.")
+    return True
 
 
 def logining(user_input: dict):

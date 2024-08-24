@@ -1,4 +1,3 @@
-import csv
 import unittest
 from pathlib import Path
 
@@ -7,7 +6,7 @@ from register import *
 path = Path('.')
 
 
-class FractionTest(unittest.TestCase):
+class RegistrationTest(unittest.TestCase):
     def test_read_csv(self):
         with open('users.csv', 'r') as file:
             reader = csv.DictReader(file)
