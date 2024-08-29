@@ -18,7 +18,12 @@ def main() -> None:
             logining(get_user_input())
         elif choice == 2:
             read_csv()
-            validate(get_user_input())
-            write_csv(get_user_input())
+            try:
+                validate(get_user_input())
+            except Exception as ex:
+                print(ex)
+            res = write_csv(get_user_input())
+            if res:
+                print("пол..")
         else:
             print("Работа с меню завершена")
