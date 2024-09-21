@@ -21,15 +21,22 @@ def get_user_input():
     return user_input
 
 
-def validate(user_input: dict):
+def validate_1(user_input: dict):
     pattern = re.compile(r"^\S+@\S+\.\S+$")
     is_valid = pattern.match(user_input["email"])
+    if is_valid:
+        return True
     if not is_valid:
         raise Exception("Invalid input")
     print(is_valid is not None)
-    if user_input["login"] in [user['login'] for user in read_csv()] or user_input["email"] in [user['email'] for user
-                                                                                                in read_csv()]:
+
+def validate_2(user_input: dict):
+    users = read_csv()
+    if user_input["login"] in [user["login"] for user in users] and user_input["email"] in [user["email"] for user in users]:
+        return True
+    else:
         raise Exception("Такой пользователь уже существует.")
+
 
 
 def write_csv(user_input: dict):
